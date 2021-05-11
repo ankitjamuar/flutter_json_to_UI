@@ -9,7 +9,7 @@ class ProductService {
         "https://raw.githubusercontent.com/ankitjamuar/flutter_json_to_UI/master/lib/services/products.json"));
     print(json.decode(response.body));
     return response.statusCode == 200 ?
-    Coins.fromJson(json.decode(response.body)) : Exception(
+    Coins.fromJson(json.decode(response.body)[0]) : Exception(
         "Failed to get data");
     // final body = json.decode(response.body);
     // return  body.map(Coins.fromJson);

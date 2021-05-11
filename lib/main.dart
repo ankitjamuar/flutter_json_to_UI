@@ -25,8 +25,16 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Cryptocurrency",
       home: Scaffold(
-        backgroundColor: Colors.lightBlueAccent,
+        appBar: AppBar(
+          backgroundColor: Color(0xFF242E56),
+          elevation: 0,
+          title: Center(
+            child: Text("Wallet", style: TextStyle(fontFamily: "Lato")),
+          ),
+        ),
+        backgroundColor: Color(0xFF242E56),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -39,9 +47,9 @@ class _MyAppState extends State<MyApp> {
                       child: Stack(
                         children: <Widget>[
                           Container(
-                            margin: EdgeInsets.only(top: 386),
+                            margin: EdgeInsets.only(top: 286),
                             padding: EdgeInsets.only(
-                              top: 55,
+                              top: 25,
                               left: 20,
                               right: 20,
                             ),
@@ -60,15 +68,62 @@ class _MyAppState extends State<MyApp> {
                                   children: [
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                          MainAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          snapshot.data.name != null
-                                              ? snapshot.data.name
-                                              : "<COIN NAME>",
-                                          style: TextStyle(fontSize: 20),
+                                        CircleAvatar(
+                                          radius: 25,
+                                          backgroundColor: Colors.white,
+                                          backgroundImage: NetworkImage(snapshot
+                                                      .data.imageUrl !=
+                                                  null
+                                              ? snapshot.data.imageUrl
+                                              : "https://st2.depositphotos.com/3369547/11378/v/950/depositphotos_113787590-stock-illustration-man-design-male-avatar-icon.jpg"),
                                         ),
-                                        Icon(Icons.favorite_border_rounded)
+                                        SizedBox(width: 10),
+                                        Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  snapshot.data.name != null
+                                                      ? snapshot.data.name
+                                                      : "<COIN NAME>",
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Color(0xff242E56)),
+                                                ),
+                                                SizedBox(width: 5),
+                                                Icon(
+                                                  Icons.arrow_upward_rounded,
+                                                  color: Colors.green,
+                                                )
+                                              ],
+                                            ),
+                                            Text(
+                                              snapshot.data.name != null
+                                                  ? snapshot.data.value.price
+                                                  : "<COIN VALUE>",
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(width: 110),
+                                        Column(
+                                          children: [
+                                            Text(
+                                              "730.64",
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Color(0xff242E56)),
+                                            ),
+                                            Text(
+                                              "2.57 %",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.green),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                     SizedBox(height: 20),
@@ -81,42 +136,112 @@ class _MyAppState extends State<MyApp> {
                                     ),
                                     SizedBox(height: 20),
                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("Price: "),
-                                        Text(snapshot.data.value.price != null
-                                            ? snapshot.data.value.price
-                                            : "<PRICE>"),
-                                        Icon(
-                                          Icons.arrow_upward_rounded,
-                                          color: Colors.green,
-                                        )
+                                        Text("Price ",
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              color: Colors.grey
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(snapshot.data.value.price !=
+                                                null
+                                                ? snapshot.data.value.price
+                                                : "<PRICE>"),
+                                            SizedBox(width: 5),
+                                            Icon(
+                                              Icons.arrow_circle_down_sharp,
+                                              color: Colors.red,
+                                            )
+                                          ],
+                                        ),
+
                                       ],
+                                    ),
+                                    const Divider(
+                                      height: 10,
+                                      thickness: 1,
+                                      indent: 0,
+                                      endIndent: 0,
                                     ),
                                     SizedBox(height: 10),
                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("Market Cap: "),
-                                        Text(snapshot.data.value.marketCap !=
-                                                null
-                                            ? snapshot.data.value.marketCap
-                                            : "<PRICE>"),
-                                        Icon(
-                                          Icons.arrow_circle_down_sharp,
-                                          color: Colors.red,
-                                        )
+                                        Text("Market Cap: ",
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          color: Colors.grey
+                                         ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(snapshot.data.value.marketCap !=
+                                                    null
+                                                ? snapshot.data.value.marketCap
+                                                : "<PRICE>"),
+                                            SizedBox(width: 5),
+                                            Icon(
+                                              Icons.arrow_circle_down_sharp,
+                                              color: Colors.red,
+                                            )
+                                          ],
+                                        ),
+
                                       ],
+                                    ),
+                                    const Divider(
+                                      height: 10,
+                                      thickness: 1,
+                                      indent: 0,
+                                      endIndent: 0,
                                     ),
                                     SizedBox(height: 10),
                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("All Time High: "),
-                                        Text(snapshot.data.value.allTimeHigh !=
+                                        Text("All time high ",
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              color: Colors.grey
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(snapshot.data.value.allTimeHigh !=
                                                 null
-                                            ? snapshot.data.value.allTimeHigh
-                                            : "<PRICE>"),
+                                                ? snapshot.data.value.allTimeHigh
+                                                : "<PRICE>"),
+                                            SizedBox(width: 5),
+                                            Icon(
+                                              Icons.arrow_circle_up_rounded,
+                                              color: Colors.green,
+                                            )
+                                          ],
+                                        ),
+
                                       ],
                                     ),
-                                    Image.asset("assets/graph.png")
+                                    Image.asset("assets/graph.png"),
+                                    SizedBox(height: 15),
+                                    Container(
+                                      width: 500,
+                                        color: Colors.white,
+                                        child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Color(0xFF242E56),
+                                            ),
+                                            onPressed: () {
+                                              coins =
+                                                  ProductService.getProducts();
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(18.0),
+                                              child: Text("NEXT"),
+                                            ))),
                                   ],
                                 )),
                               ],
@@ -124,18 +249,36 @@ class _MyAppState extends State<MyApp> {
                           ),
                           Padding(
                               padding:
-                                  const EdgeInsets.only(top: 120, left: 130),
-                              child: CircleAvatar(
-                                radius: 80,
-                                backgroundImage: NetworkImage(
-                                    snapshot.data.imageUrl != null ? snapshot.data.imageUrl:
-                                    "https://st2.depositphotos.com/3369547/11378/v/950/depositphotos_113787590-stock-illustration-man-design-male-avatar-icon.jpg"),
+                                  const EdgeInsets.only(top: 40, left: 130),
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 80,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage: NetworkImage(snapshot
+                                                .data.imageUrl !=
+                                            null
+                                        ? snapshot.data.imageUrl
+                                        : "https://st2.depositphotos.com/3369547/11378/v/950/depositphotos_113787590-stock-illustration-man-design-male-avatar-icon.jpg"),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    snapshot.data.name != null
+                                        ? snapshot.data.name
+                                        : "<COIN NAME>",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
                               )),
                         ],
                       ),
                     );
                   } else if (snapshot.hasError) {
-                    return Center(child: Text("Error fetching data"));
+                    print(snapshot.error);
+                    return Center(
+                        child: Text("Error fetching data ${snapshot.error} "));
                   }
                   return CircularProgressIndicator();
                 },
@@ -143,14 +286,6 @@ class _MyAppState extends State<MyApp> {
             ],
           ),
         ),
-        bottomNavigationBar: Container(
-            color: Colors.white,
-            child: ElevatedButton(
-                onPressed: () {},
-                child: Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Text("NEXT"),
-                ))),
       ),
     );
   }
